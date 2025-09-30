@@ -4,43 +4,36 @@ import { useEffect } from "react";
 import fetchAll from "./service/pokemonService";
 import PokemonCard from "../components/PokemonCard";
 import header from "./assets/header.jpeg";
+import Search from "../components/Search";
 
 const App = () => {
+  const detallesFiltrados = (query) => {
+    query === ""
+      ? setBusqueda(detalles)
+      : setBusqueda(detalles.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(query.toLowerCase())
+        ))};
+
   const [detalles, setDetalles] = useState([]);
-  const [busqueda, setBusqueda] = useState('');
+  const [busqueda, setBusqueda] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchAll();
       setDetalles(data);
+      setBusqueda(data);
     };
     fetchData();
   }, []);
-  //Operador ternario
-  const detallesFiltrados =
-    busqueda === ""
-      ? detalles 
-      : detalles.filter((pokemon) =>
-          pokemon.name.toLowerCase().includes(busqueda.toLowerCase())
-        );
-
+  
   return (
     <>
       <header className="header-bg">
         <img src={header} alt="header" className="w-100" />
-
-        <div className="tarjeta ">
-        <h2>Filtrar Pokemón</h2>
-          <input
-          type="text"
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-          placeholder="Buscar Pokémon..."
-        />
-        </div>
+        <Search onSearch={detallesFiltrados}/>
       </header>
 
       <div className="pokemon-container">
-        {detallesFiltrados.map((pokemon) => (
+        {busqueda.map((pokemon) => (
           <PokemonCard
             key={pokemon.name}
             nombre={pokemon.name}

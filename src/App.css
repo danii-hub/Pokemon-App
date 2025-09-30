@@ -82,33 +82,9 @@ img{
 }
 
 
-input{
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-}
 
 
-.tarjeta{
-  background: linear-gradient(135deg, #11cb14, #fc2525); 
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  max-width: 400px;
-  margin: 20px auto;
-  text-align: center;
-  color: white;
-}
-.tarjeta h2{
-  margin-bottom: 15px;
-  font-size: 1.8rem;
 
-}
 
-.tarjeta input:focus {
-  outline: none;
-  box-shadow: 0 0 5px 2px rgba(255, 255, 0, 0.5);
-}
 
 
